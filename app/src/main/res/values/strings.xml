@@ -4,5 +4,9 @@
     <string name="app_name">AndroidChallenge</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="normal">NORMAL</string>
+    <string name="easy">EASY</string>
+    <string name="Hard">Hard</string>
 
 </resources>

@@ -2,15 +2,22 @@ package jp.ac.it_college.std.s13003.androidchallenge;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.style.BackgroundColorSpan;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
-
+import android.widget.TextView;
 
 
 public class MainActivity extends Activity {
@@ -26,25 +33,50 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            new AlertDialog.Builder(this)
+                    .setTitle("終了の確認")
+                    .setPositiveButton("はい",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                }
+                            })
+                    .setNegativeButton("いいえ",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                }
+                            })
+                    .show();
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+    public boolean onTouchEvent(MotionEvent event) {
+        TextView shota = (TextView)findViewById(R.id.textView2);
+        int action = event.getAction() & MotionEvent.ACTION_MASK;
+        if (action == MotionEvent.ACTION_DOWN) {
+        DifficultFragment fragment = DifficultFragment.newInstance();
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.hazime, fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.commit();
+            shota.setVisibility(View.INVISIBLE);
+
+/*            Intent intent = new Intent(this, GameActivity.class);
+            startActivity(intent);*/
+        }
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 
     /**
      * A placeholder fragment containing a simple view.
