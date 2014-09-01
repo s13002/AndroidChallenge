@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="jp.ac.it_college.std.s13003.androidchallenge.ResultActivity" >
+    tools:context="jp.ac.it_college.std.s13002.androidchallenge.ResultActivity" >
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="100"
